@@ -95,6 +95,7 @@ $(sepolicy_policy.conf): $(call build_policy, $(sepolicy_build_files))
 	$(hide) m4 $(PRIVATE_ADDITIONAL_M4DEFS) \
 		-D mls_num_sens=$(PRIVATE_MLS_SENS) -D mls_num_cats=$(PRIVATE_MLS_CATS) \
 		-D target_build_variant=$(TARGET_BUILD_VARIANT) \
+		-D target_needs_platform_text_relocations=$(TARGET_NEEDS_PLATFORM_TEXTRELS) \
 		-s $^ > $@
 	$(hide) sed '/dontaudit/d' $@ > $@.dontaudit
 
@@ -133,6 +134,7 @@ $(sepolicy_policy_recovery.conf): $(call build_policy, $(sepolicy_build_files))
 	$(hide) m4 $(PRIVATE_ADDITIONAL_M4DEFS) \
 		-D mls_num_sens=$(PRIVATE_MLS_SENS) -D mls_num_cats=$(PRIVATE_MLS_CATS) \
 		-D target_build_variant=$(TARGET_BUILD_VARIANT) \
+		-D target_needs_platform_text_relocations=$(TARGET_NEEDS_PLATFORM_TEXTRELS) \
 		-D target_recovery=true \
 		-s $^ > $@
 
